@@ -46,13 +46,23 @@ describe BowlingScore do
     end
   end
 
-  context "player scores points in multiple spare" do 
+  context "player scores 2 spares" do 
     it "it returns the total score and the number of strikes and spares scored" do 
       scoresheet = BowlingScore.new([[1,1],[7,3],[6,4],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1]])
       scoresheet.frames
       scoresheet.spare?
       scoresheet.strike?
       expect(scoresheet.final_score).to eq ("The final score for this game is 49. You scored 0 strikes and 2 spares.")
+    end
+  end
+
+  context "player scores 3 strikes" do 
+    it "it returns the total score and the number of strikes and spares scored" do 
+      scoresheet = BowlingScore.new([[10,0],[1,1],[10,0],[1,1],[10,0],[1,1],[1,1],[1,1],[1,1],[1,1]])
+      scoresheet.frames
+      scoresheet.spare?
+      scoresheet.strike?
+      expect(scoresheet.final_score).to eq ("The final score for this game is 50. You scored 3 strikes and 0 spares.")
     end
   end
 end 

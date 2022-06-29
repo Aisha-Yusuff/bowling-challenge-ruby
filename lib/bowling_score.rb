@@ -10,8 +10,8 @@ class BowlingScore
   def frames
     arr = @scoresheet.select { |frame| frame.sum < 10 }
     return unless arr
-      points = arr.flatten.sum
-      @total.push(points)
+    points = arr.flatten.sum
+    @total.push(points)
   end
 
   def spare?
@@ -26,12 +26,14 @@ class BowlingScore
   end
 
   def strike?
-    arr = @scoresheet.find_index { |frame| frame[0] == 10 }
-    return unless arr 
-    next_roll = @scoresheet[arr + 1]
-    points = 10 + next_roll.sum 
-    @total.push(points)
-    @strike_count = +1
+    arr = @scoresheet.each_with_index.select { |frame, _index| frame[0] == 10 }.map &:last
+    return unless arr
+    arr.each do |rolls|
+      next_roll = @scoresheet[rolls + 1]
+      points = 10 + next_roll.sum 
+      @total.push(points)
+      @strike_count += 1
+    end
   end
 
   def final_score
