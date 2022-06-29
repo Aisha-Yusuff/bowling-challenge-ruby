@@ -24,5 +24,15 @@ describe BowlingScore do
         expect(scoresheet.final_score).to eq ("The final score for this game is 13. You scored 0 strikes and 1 spares.")
       end
     end
+
+    context "player scores one strike" do 
+      it "it returns total score and number of spares and strikes the player scored" do 
+        scoresheet = BowlingScore.new([[0,0],[10,0],[2,5],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0]])
+        scoresheet.frames
+        scoresheet.spare?
+        scoresheet.strike?
+        expect(scoresheet.final_score).to eq ("The final score for this game is 24. You scored 1 strikes and 0 spares.")
+      end
+    end
   end
 end 
