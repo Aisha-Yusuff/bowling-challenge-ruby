@@ -7,6 +7,8 @@ class BowlingScore
     @strike_count = 0
   end
 
+  # calculate points for frames that are not strikes or spares
+  # push points into @total arrat
   def frames
     arr = @scoresheet.select { |frame| frame.sum < 10 }
     return unless arr
@@ -36,6 +38,7 @@ class BowlingScore
     end
   end
 
+  
   def final_score
     final_score = @total.sum
     spare_count = @spare_count
